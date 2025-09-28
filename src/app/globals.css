@@ -46,83 +46,82 @@
 :root {
   --radius: 0.625rem;
   
-  /* Nature Light Theme - Fresh & Vibrant */
-  --background: oklch(0.98 0.008 150); /* Clean mint white */
-  --foreground: oklch(0.18 0.03 160); /* Deep forest text */
-  --card: oklch(0.99 0.005 140); /* Pure white with green tint */
-  --card-foreground: oklch(0.18 0.03 160);
-  --popover: oklch(0.99 0.005 140);
-  --popover-foreground: oklch(0.18 0.03 160);
-  --primary: oklch(0.42 0.16 155); /* Rich tree green */
-  --primary-foreground: oklch(0.98 0.008 150);
-  --secondary: oklch(0.94 0.02 180); /* Soft sky blue */
-  --secondary-foreground: oklch(0.22 0.03 160);
-  --muted: oklch(0.95 0.012 155); /* Muted sage */
-  --muted-foreground: oklch(0.45 0.025 150);
-  --accent: oklch(0.62 0.14 200); /* Ocean blue accent */
-  --accent-foreground: oklch(0.98 0.008 150);
-  --destructive: oklch(0.58 0.22 25); /* Natural red */
-  --border: oklch(0.89 0.018 155); /* Subtle green border */
-  --input: oklch(0.94 0.012 155); /* Light input */
-  --ring: oklch(0.42 0.16 155); /* Focus ring - tree green */
+  /* Day Nature Theme - Standing in a Sunlit Forest Clearing */
+  --background: oklch(0.96 0.02 210); /* Morning sky blue */
+  --foreground: oklch(0.18 0.04 160); /* Deep forest shadow text */
+  --card: oklch(0.98 0.01 120); /* Sunlit cloud white */
+  --card-foreground: oklch(0.20 0.04 155);
+  --popover: oklch(0.99 0.008 140); /* Fresh leaf highlight */
+  --popover-foreground: oklch(0.18 0.04 160);
+  --primary: oklch(0.38 0.18 145); /* Mature oak tree bark */
+  --primary-foreground: oklch(0.97 0.01 120);
+  --secondary: oklch(0.89 0.04 205); /* Clear sky blue */
+  --secondary-foreground: oklch(0.25 0.05 160);
+  --muted: oklch(0.92 0.03 150); /* Sun-dappled foliage */
+  --muted-foreground: oklch(0.40 0.04 155);
+  --accent: oklch(0.58 0.16 65); /* Golden sunlight accent */
+  --accent-foreground: oklch(0.18 0.04 160);
+  --destructive: oklch(0.55 0.22 25); /* Autumn red leaf */
+  --border: oklch(0.85 0.05 150); /* Forest edge shadow */
+  --input: oklch(0.93 0.03 155); /* Mossy ground input */
+  --ring: oklch(0.38 0.18 145); /* Tree ring focus */
   
-  /* Chart colors */
-  --chart-1: oklch(0.52 0.16 155); /* Forest green */
-  --chart-2: oklch(0.58 0.13 200); /* Ocean blue */
-  --chart-3: oklch(0.65 0.11 180); /* Sky blue */
-  --chart-4: oklch(0.48 0.18 140); /* Leaf green */
-  --chart-5: oklch(0.55 0.12 220); /* Deep blue */
+  /* Chart colors - Forest ecosystem */
+  --chart-1: oklch(0.45 0.16 140); /* Pine tree green */
+  --chart-2: oklch(0.52 0.12 205); /* Mountain lake blue */
+  --chart-3: oklch(0.60 0.14 65);  /* Sunbeam yellow */
+  --chart-4: oklch(0.35 0.12 120); /* Deep forest green */
+  --chart-5: oklch(0.68 0.08 180); /* Distant sky */
   
-  /* Sidebar */
-  --sidebar: oklch(0.97 0.008 150);
-  --sidebar-foreground: oklch(0.18 0.03 160);
-  --sidebar-primary: oklch(0.42 0.16 155);
-  --sidebar-primary-foreground: oklch(0.98 0.008 150);
-  --sidebar-accent: oklch(0.94 0.02 180);
-  --sidebar-accent-foreground: oklch(0.22 0.03 160);
-  --sidebar-border: oklch(0.89 0.018 155);
-  --sidebar-ring: oklch(0.42 0.16 155);
+  /* Sidebar - Looking up through tree canopy */
+  --sidebar: oklch(0.94 0.025 140);
+  --sidebar-foreground: oklch(0.20 0.04 155);
+  --sidebar-primary: oklch(0.42 0.16 145);
+  --sidebar-primary-foreground: oklch(0.97 0.01 120);
+  --sidebar-accent: oklch(0.87 0.05 200);
+  --sidebar-accent-foreground: oklch(0.25 0.05 160);
+  --sidebar-border: oklch(0.88 0.04 145);
+  --sidebar-ring: oklch(0.42 0.16 145);
 }
 
 .dark {
-  /* Nature Dark Theme - Starry Night Forest */
-  --background: oklch(0.13 0.022 185); /* Deep ocean night */
-  --foreground: oklch(0.97 0.005 150); /* Star-like bright text */
-  --card: oklch(0.16 0.028 175); /* Forest depth */
-  --card-foreground: oklch(0.97 0.005 150);
-  --popover: oklch(0.16 0.028 175);
-  --popover-foreground: oklch(0.97 0.005 150);
-  --primary: oklch(0.68 0.18 155); /* Glowing tree green */
-  --primary-foreground: oklch(0.13 0.022 185);
-  --secondary: oklch(0.24 0.04 200); /* Deep ocean */
-  --secondary-foreground: oklch(0.97 0.005 150);
-  --muted: oklch(0.21 0.025 170); /* Muted forest */
-  --muted-foreground: oklch(0.72 0.015 160);
-  --accent: oklch(0.52 0.15 200); /* Vibrant ocean */
-  --accent-foreground: oklch(0.97 0.005 150);
-  --destructive: oklch(0.63 0.21 27); /* Warm red */
-  --border: oklch(0.26 0.03 175); /* Night border */
-  --input: oklch(0.19 0.028 175); /* Input in darkness */
-  --ring: oklch(0.68 0.18 155); /* Glowing focus */
+  /* Night Nature Theme - Starry Forest Canopy */
+  --background: oklch(0.09 0.03 250); /* Deep midnight sky */
+  --foreground: oklch(0.95 0.008 120); /* Moonlight text */
+  --card: oklch(0.13 0.04 160); /* Forest silhouette */
+  --card-foreground: oklch(0.95 0.008 120);
+  --popover: oklch(0.15 0.05 155); /* Moonlit clearing */
+  --popover-foreground: oklch(0.95 0.008 120);
+  --primary: oklch(0.72 0.12 120); /* Glowing moss green */
+  --primary-foreground: oklch(0.09 0.03 250);
+  --secondary: oklch(0.20 0.06 240); /* Starry night blue */
+  --secondary-foreground: oklch(0.95 0.008 120);
+  --muted: oklch(0.18 0.04 170); /* Shadowy foliage */
+  --muted-foreground: oklch(0.75 0.02 130);
+  --accent: oklch(0.65 0.15 280); /* Twinkling star purple */
+  --accent-foreground: oklch(0.95 0.008 120);
+  --destructive: oklch(0.62 0.20 20); /* Campfire glow */
+  --border: oklch(0.22 0.05 160); /* Tree trunk border */
+  --input: oklch(0.16 0.04 155); /* Forest floor */
+  --ring: oklch(0.72 0.12 120); /* Glowing focus ring */
   
-  /* Chart colors - starry night palette */
-  --chart-1: oklch(0.68 0.18 155); /* Glowing green */
-  --chart-2: oklch(0.52 0.15 200); /* Ocean blue */
-  --chart-3: oklch(0.58 0.12 220); /* Deep night blue */
-  --chart-4: oklch(0.72 0.16 140); /* Light foliage */
-  --chart-5: oklch(0.48 0.17 240); /* Midnight ocean */
+  /* Chart colors - Night sky and forest */
+  --chart-1: oklch(0.68 0.14 120);  /* Moonlit foliage */
+  --chart-2: oklch(0.55 0.12 240);  /* Deep night blue */
+  --chart-3: oklch(0.80 0.10 280);  /* Bright star white */
+  --chart-4: oklch(0.45 0.18 140);  /* Dark pine green */
+  --chart-5: oklch(0.70 0.08 200);  /* Milky way glow */
   
-  /* Sidebar */
-  --sidebar: oklch(0.16 0.028 175);
-  --sidebar-foreground: oklch(0.97 0.005 150);
-  --sidebar-primary: oklch(0.68 0.18 155);
-  --sidebar-primary-foreground: oklch(0.13 0.022 185);
-  --sidebar-accent: oklch(0.24 0.04 200);
-  --sidebar-accent-foreground: oklch(0.97 0.005 150);
-  --sidebar-border: oklch(0.26 0.03 175);
-  --sidebar-ring: oklch(0.68 0.18 155);
+  /* Sidebar - Under forest canopy at night */
+  --sidebar: oklch(0.14 0.04 155);
+  --sidebar-foreground: oklch(0.95 0.008 120);
+  --sidebar-primary: oklch(0.72 0.12 120);
+  --sidebar-primary-foreground: oklch(0.09 0.03 250);
+  --sidebar-accent: oklch(0.22 0.06 240);
+  --sidebar-accent-foreground: oklch(0.95 0.008 120);
+  --sidebar-border: oklch(0.20 0.05 160);
+  --sidebar-ring: oklch(0.72 0.12 120);
 }
-
 @layer base {
   * {
     @apply border-border outline-ring/50;

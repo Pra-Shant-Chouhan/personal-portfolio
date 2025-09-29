@@ -7,7 +7,7 @@ import { Contact } from "@/components/contact";
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      <Header />
+    
       <main>
         <Hero />
         <About />

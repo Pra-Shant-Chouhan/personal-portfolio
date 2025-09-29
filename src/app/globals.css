@@ -45,83 +45,98 @@
 
 :root {
   --radius: 0.625rem;
-  
-  /* Day Nature Theme - Standing in a Sunlit Forest Clearing */
-  --background: oklch(0.96 0.02 210); /* Morning sky blue */
-  --foreground: oklch(0.18 0.04 160); /* Deep forest shadow text */
-  --card: oklch(0.98 0.01 120); /* Sunlit cloud white */
-  --card-foreground: oklch(0.20 0.04 155);
-  --popover: oklch(0.99 0.008 140); /* Fresh leaf highlight */
-  --popover-foreground: oklch(0.18 0.04 160);
-  --primary: oklch(0.38 0.18 145); /* Mature oak tree bark */
-  --primary-foreground: oklch(0.97 0.01 120);
-  --secondary: oklch(0.89 0.04 205); /* Clear sky blue */
-  --secondary-foreground: oklch(0.25 0.05 160);
-  --muted: oklch(0.92 0.03 150); /* Sun-dappled foliage */
-  --muted-foreground: oklch(0.40 0.04 155);
-  --accent: oklch(0.58 0.16 65); /* Golden sunlight accent */
-  --accent-foreground: oklch(0.18 0.04 160);
-  --destructive: oklch(0.55 0.22 25); /* Autumn red leaf */
-  --border: oklch(0.85 0.05 150); /* Forest edge shadow */
-  --input: oklch(0.93 0.03 155); /* Mossy ground input */
-  --ring: oklch(0.38 0.18 145); /* Tree ring focus */
-  
-  /* Chart colors - Forest ecosystem */
-  --chart-1: oklch(0.45 0.16 140); /* Pine tree green */
-  --chart-2: oklch(0.52 0.12 205); /* Mountain lake blue */
-  --chart-3: oklch(0.60 0.14 65);  /* Sunbeam yellow */
-  --chart-4: oklch(0.35 0.12 120); /* Deep forest green */
-  --chart-5: oklch(0.68 0.08 180); /* Distant sky */
-  
-  /* Sidebar - Looking up through tree canopy */
-  --sidebar: oklch(0.94 0.025 140);
-  --sidebar-foreground: oklch(0.20 0.04 155);
-  --sidebar-primary: oklch(0.42 0.16 145);
-  --sidebar-primary-foreground: oklch(0.97 0.01 120);
-  --sidebar-accent: oklch(0.87 0.05 200);
-  --sidebar-accent-foreground: oklch(0.25 0.05 160);
-  --sidebar-border: oklch(0.88 0.04 145);
-  --sidebar-ring: oklch(0.42 0.16 145);
+
+  /* 🌅 Light Mode: Sunset Horizon */
+  --background: #FFFBF7;
+  --foreground: #2A1A14;
+
+  --card: #FFF6F0;
+  --card-foreground: #2A1A14;
+
+  --popover: #FFF8F3;
+  --popover-foreground: #2A1A14;
+
+  --primary: #F94F49; /* Vibrant coral red */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #FF8545; /* Orange sunset */
+  --secondary-foreground: #2A1A14;
+
+  --muted: #FFBB67; /* Warm golden */
+  --muted-foreground: #5A3A2E;
+
+  --accent: #BE3629; /* Deep sunset red */
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #D72638;
+  --border: #DAB79D;
+  --input: #FFE7D4;
+  --ring: #F94F49;
+
+  /* Charts */
+  --chart-1: #BE3629;
+  --chart-2: #F94F49;
+  --chart-3: #FF8545;
+  --chart-4: #FFBB67;
+  --chart-5: #DAB79D;
+
+  /* Sidebar */
+  --sidebar: #FFF6F0;
+  --sidebar-foreground: #2A1A14;
+  --sidebar-primary: #F94F49;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #FF8545;
+  --sidebar-accent-foreground: #2A1A14;
+  --sidebar-border: #FFD2B0;
+  --sidebar-ring: #F94F49;
 }
 
 .dark {
-  /* Night Nature Theme - Starry Forest Canopy */
-  --background: oklch(0.09 0.03 250); /* Deep midnight sky */
-  --foreground: oklch(0.95 0.008 120); /* Moonlight text */
-  --card: oklch(0.13 0.04 160); /* Forest silhouette */
-  --card-foreground: oklch(0.95 0.008 120);
-  --popover: oklch(0.15 0.05 155); /* Moonlit clearing */
-  --popover-foreground: oklch(0.95 0.008 120);
-  --primary: oklch(0.72 0.12 120); /* Glowing moss green */
-  --primary-foreground: oklch(0.09 0.03 250);
-  --secondary: oklch(0.20 0.06 240); /* Starry night blue */
-  --secondary-foreground: oklch(0.95 0.008 120);
-  --muted: oklch(0.18 0.04 170); /* Shadowy foliage */
-  --muted-foreground: oklch(0.75 0.02 130);
-  --accent: oklch(0.65 0.15 280); /* Twinkling star purple */
-  --accent-foreground: oklch(0.95 0.008 120);
-  --destructive: oklch(0.62 0.20 20); /* Campfire glow */
-  --border: oklch(0.22 0.05 160); /* Tree trunk border */
-  --input: oklch(0.16 0.04 155); /* Forest floor */
-  --ring: oklch(0.72 0.12 120); /* Glowing focus ring */
-  
-  /* Chart colors - Night sky and forest */
-  --chart-1: oklch(0.68 0.14 120);  /* Moonlit foliage */
-  --chart-2: oklch(0.55 0.12 240);  /* Deep night blue */
-  --chart-3: oklch(0.80 0.10 280);  /* Bright star white */
-  --chart-4: oklch(0.45 0.18 140);  /* Dark pine green */
-  --chart-5: oklch(0.70 0.08 200);  /* Milky way glow */
-  
-  /* Sidebar - Under forest canopy at night */
-  --sidebar: oklch(0.14 0.04 155);
-  --sidebar-foreground: oklch(0.95 0.008 120);
-  --sidebar-primary: oklch(0.72 0.12 120);
-  --sidebar-primary-foreground: oklch(0.09 0.03 250);
-  --sidebar-accent: oklch(0.22 0.06 240);
-  --sidebar-accent-foreground: oklch(0.95 0.008 120);
-  --sidebar-border: oklch(0.20 0.05 160);
-  --sidebar-ring: oklch(0.72 0.12 120);
+  /* 🌌 Dark Mode: Desert Mirage */
+  --background: #020316;
+  --foreground: #EAE6E1;
+
+  --card: #1A1A1F;
+  --card-foreground: #EAE6E1;
+
+  --popover: #1E1B25;
+  --popover-foreground: #EAE6E1;
+
+  --primary: #5C2755; /* Rich purple */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #6A7543; /* Muted olive green */
+  --secondary-foreground: #FFFFFF;
+
+  --muted: #783014; /* Warm earthy brown */
+  --muted-foreground: #E6D2C4;
+
+  --accent: #D4AA70; /* Golden sand */
+  --accent-foreground: #1A1A1F;
+
+  --destructive: #A12C2C;
+  --border: #3A2D38;
+  --input: #2A2A30;
+  --ring: #5C2755;
+
+  /* Charts */
+  --chart-1: #5C2755;
+  --chart-2: #783014;
+  --chart-3: #D4AA70;
+  --chart-4: #6A7543;
+  --chart-5: #020316;
+
+  /* Sidebar */
+  --sidebar: #1A1A1F;
+  --sidebar-foreground: #EAE6E1;
+  --sidebar-primary: #5C2755;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #6A7543;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #3A2D38;
+  --sidebar-ring: #5C2755;
 }
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

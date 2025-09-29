@@ -4,18 +4,91 @@ import * as React from "react"
 import { Leaf, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { usePathname, useRouter } from "next/navigation"
 
 const navigation = [
-  { name: "Home", href: "#home" },
+  { name: "Home", href: "/" },
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
   { name: "Contact", href: "#contact" },
+  { name: "Blogs", href: "/blogs" },
 ]
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeLink, setActiveLink] = useState("")
+  const [hash, setHash] = useState("")
+  const pathname = usePathname()
+  const router = useRouter()
+
+  useEffect(() => {
+    setActiveLink(pathname)
+    
+    // Handle hash changes
+    const handleHashChange = () => {
+      setHash(window.location.hash)
+    }
+
+    // Set initial hash
+    setHash(window.location.hash)
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange)
+    window.addEventListener('load', handleHashChange)
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+      window.removeEventListener('load', handleHashChange)
+    }
+  }, [pathname])
+
+  const isActive = (href: string) => {
+    // Handle page routes
+    if (href.startsWith('/') && !href.startsWith('/#')) {
+      if (href === "/") {
+        return activeLink === "/" && !hash
+      }
+      return activeLink.startsWith(href)
+    }
+    
+    // Handle hash links
+    if (href.startsWith('#')) {
+      return hash === href
+    }
+    
+    return false
+  }
+
+  const handleNavClick = (href: string, event: React.MouseEvent) => {
+    if (href.startsWith('#')) {
+      event.preventDefault()
+      setHash(href)
+      
+      // Scroll to section
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        // If we're not on the home page, navigate to home first then scroll
+        if (pathname !== '/') {
+          router.push(`/${href}`)
+        } else {
+          window.location.hash = href
+        }
+      }
+    }
+    
+    // Close mobile menu after click
+    setMobileMenuOpen(false)
+  }
+
+  const linkBaseStyles = "relative text-sm font-medium transition-colors duration-200 focus:outline-none cursor-pointer"
+  const linkInactiveStyles = "text-foreground/70 hover:text-primary"
+  const linkActiveStyles = "text-primary"
+
+  const underlineStyles = "absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -35,9 +108,17 @@ export function Header() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary focus:text-primary focus:outline-none"
+                onClick={(e) => handleNavClick(item.href, e)}
+                className={`group ${linkBaseStyles} ${
+                  isActive(item.href) ? linkActiveStyles : linkInactiveStyles
+                }`}
               >
                 {item.name}
+                <span 
+                  className={`${underlineStyles} ${
+                    isActive(item.href) ? "w-full" : "w-0"
+                  }`} 
+                />
               </a>
             ))}
           </nav>
@@ -71,10 +152,19 @@ export function Header() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block rounded-md px-3 py-2 text-base font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-accent-foreground"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(item.href, e)}
+                  className={`group relative py-2 text-base font-medium transition-colors duration-200 rounded-md px-3 ${
+                    isActive(item.href)
+                      ? "text-primary bg-accent/50"
+                      : "text-foreground/80 hover:bg-accent hover:text-accent-foreground"
+                  }`}
                 >
                   {item.name}
+                  <span 
+                    className={`absolute bottom-2 left-3 right-3 h-0.5 bg-primary transition-all duration-300 ${
+                      isActive(item.href) ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                    }`} 
+                  />
                 </a>
               ))}
             </nav>

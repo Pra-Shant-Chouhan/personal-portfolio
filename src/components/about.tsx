@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Code, Database, Palette, Zap } from "lucide-react"
+import { Code, Database, Layout, Zap } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Container } from "@/components/ui/container"
 
@@ -9,25 +9,25 @@ const skills = [
   {
     icon: Code,
     title: "Frontend Development",
-    description: "React, Next.js, TypeScript, Tailwind CSS",
+    description: "React, Next.js, EJS, jQuery, TypeScript, Tailwind CSS",
     color: "text-primary",
   },
   {
     icon: Database,
     title: "Backend Development", 
-    description: "Node.js, Express.js, MongoDB, PostgreSQL",
+    description: "Node.js, Express.js, MongoDB, PostgreSQL, MERN Stack",
     color: "text-accent",
   },
   {
-    icon: Palette,
-    title: "UI/UX Design",
-    description: "Figma, Adobe XD, User-centered design",
+    icon: Layout,
+    title: "UI/UX Development",
+    description: "Component development, Interactive interfaces, Responsive design",
     color: "text-secondary",
   },
   {
     icon: Zap,
-    title: "Performance",
-    description: "Optimization, SEO, Web Vitals",
+    title: "Full Stack Solutions",
+    description: "MERN & Next.js applications, Performance optimization",
     color: "text-primary",
   },
 ]
@@ -41,7 +41,7 @@ export function About() {
             About Me
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            I'm a passionate developer who loves creating digital experiences that matter
+            Full-stack developer specializing in building modern web applications with MERN and Next.js
           </p>
         </div>
 
@@ -49,13 +49,15 @@ export function About() {
           <div className="space-y-6">
             <p className="text-muted-foreground leading-relaxed">
               With over 3 years of experience in web development, I specialize in building 
-              modern, scalable applications using the MERN stack. I have a keen eye for 
-              design and believe in creating user experiences that are both beautiful and functional.
+              modern, scalable applications using both MERN stack and Next.js. I have strong 
+              expertise in frontend technologies including EJS, jQuery, React, and Next.js, 
+              with a focus on creating interactive and responsive user interfaces.
             </p>
             
             <p className="text-muted-foreground leading-relaxed">
-              When I'm not coding, you can find me exploring new technologies, contributing to 
-              open-source projects, or sharing my knowledge through technical writing and mentoring.
+              As a UI/UX Developer, I bridge the gap between design and implementation, 
+              transforming design concepts into functional, high-performance web applications 
+              with clean code and optimal user experiences.
             </p>
 
             <div className="pt-4">
@@ -63,19 +65,19 @@ export function About() {
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-primary rounded-full mr-3" />
-                  Full-stack web application development
+                  Full-stack development with MERN & Next.js
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-accent rounded-full mr-3" />
-                  UI/UX design and prototyping
+                  Frontend development using EJS, jQuery, and modern frameworks
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-secondary rounded-full mr-3" />
-                  Performance optimization and SEO
+                  UI/UX development and component implementation
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-primary rounded-full mr-3" />
-                  Technical mentoring and consulting
+                  Responsive web applications and performance optimization
                 </li>
               </ul>
             </div>

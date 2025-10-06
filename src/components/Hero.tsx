@@ -36,7 +36,7 @@ export function Hero() {
       </div>
 
       <Container className="relative z-10 text-center">
-        <header className="backdrop-blur-md bg-background/40 dark:bg-background/30 rounded-3xl border border-white/20 dark:border-white/10 shadow-2xl p-6 md:p-10 lg:p-12 mx-auto max-w-4xl">
+        <header className="backdrop-blur-md bg-background/40 dark:bg-background/30 rounded-3xl border border-white/20 dark:border-white/10 shadow-2xl p-6 md:p-10 lg:p-12 mx-auto max-w-7xl">
 
           {/* Profile + Name */}
           <div className="grid grid-cols-[1fr_64px] md:grid-cols-[1fr_128px] items-center gap-4 md:gap-8 justify-between">
@@ -68,16 +68,16 @@ export function Hero() {
 
           {/* Description */}
           <div className="mt-6 md:mt-8 space-y-4">
-            <TypographyP className="">
+            <TypographyLead className="">
               At <strong className="text-foreground font-semibold">Triggers Web Solution</strong>, I build end-to-end full-stack applications with dynamic front-ends using{" "}
               <strong className="text-foreground/90">Next.js, EJS, and jQuery</strong>, and scalable backends powered by{" "}
               <strong className="text-foreground/90">Node.js, Express.js, and MongoDB</strong>, deployed securely on{" "}
               <strong className="text-foreground/90">AWS</strong>.
-            </TypographyP>
+            </TypographyLead>
 
-            <TypographyMuted className="">
+            <TypographyP className="">
               With <strong className="text-foreground font-semibold">80+ completed projects</strong> spanning ticket booking systems, e-commerce platforms, education portals, construction management tools, and finance applications, I deliver <strong className="text-foreground/90">secure, high-performance, and user-friendly solutions</strong> that drive business growth.
-            </TypographyMuted>
+            </TypographyP>
           </div>
 
           {/* CTA Buttons */}

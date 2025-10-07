@@ -1,28 +1,25 @@
 // /lib/mongodb.ts
 import mongoose, { Mongoose } from "mongoose";
 
-// Validate environment variable
-const MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI) throw new Error("❌ Missing MONGODB_URI");
-
-// Define a proper global type
-declare global {
-  // eslint-disable-next-line no-var
-  var mongooseCache: {
-    conn: Mongoose | null;
-    promise: Promise<Mongoose> | null;
-  } | undefined;
+// --- Validate environment variable with type narrowing ---
+const MONGODB_URI: string = process.env.MONGODB_URI!;
+if (!MONGODB_URI) {
+  throw new Error("❌ Missing MONGODB_URI in environment variables");
 }
 
-// Initialize global cache if not exists
+// --- Global cache for hot reloads ---
+declare global {
+  // eslint-disable-next-line no-var
+  var mongooseCache: { conn: Mongoose | null; promise: Promise<Mongoose> | null } | undefined;
+}
+
 if (!global.mongooseCache) {
   global.mongooseCache = { conn: null, promise: null };
 }
 
-// TypeScript now knows global.mongooseCache is defined
 const cached = global.mongooseCache;
 
-// Connection helper
+// --- Connection helper ---
 export async function connectToDatabase(): Promise<Mongoose> {
   if (cached.conn) return cached.conn;
 

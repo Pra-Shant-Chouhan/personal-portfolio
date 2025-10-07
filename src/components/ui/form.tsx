@@ -80,7 +80,7 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
     <FormItemContext.Provider value={{ id }}>
       <div
         data-slot="form-item"
-        className={cn("grid gap-2", className)}
+        className={cn("grid gap-1.5", className)}
         {...props}
       />
     </FormItemContext.Provider>
@@ -135,25 +135,48 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
   )
 }
 
-function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
-  const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message ?? "") : props.children
+// function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
+//   const { error, formMessageId } = useFormField()
+//   const body = error ? String(error?.message ?? "") : props.children
 
-  if (!body) {
-    return null
-  }
+//   if (!body) {
+//     return null
+//   }
+
+//   return (
+//     <p
+//       data-slot="form-message"
+//       id={formMessageId}
+//       className={cn("text-destructive text-sm", className)}
+//       {...props}
+//     >
+//       {body}
+//     </p>
+//   )
+// }
+function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
+  const { error, formMessageId } = useFormField();
+  const body = error ? String(error?.message ?? "") : props.children;
+
+  const isVisible = Boolean(body);
 
   return (
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn("text-destructive text-sm", className)}
+      className={cn(
+        "text-sm min-h-[1.25rem] transition-all duration-200",
+        isVisible ? "text-destructive opacity-100" : "opacity-0",
+        className
+      )}
+      aria-live="polite"
       {...props}
     >
-      {body}
+      {body || "" /* invisible placeholder to preserve height */}
     </p>
-  )
+  );
 }
+
 
 export {
   useFormField,

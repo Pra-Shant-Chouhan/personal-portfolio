@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, Send } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
+import { ContactForm } from "./contactForm/ContactForm"
 
 const contactInfo = [
   {
@@ -36,7 +37,7 @@ export function Contact() {
             Get In Touch
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? Let's work together to bring your ideas to life.
+            Have a project in mind? Let&apos;s work together to bring your ideas to life.
           </p>
         </div>
 
@@ -45,12 +46,12 @@ export function Contact() {
           <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-semibold text-foreground mb-4">
-                Let's Start a Conversation
+                Let&apos;s Start a Conversation
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                I'm always interested in hearing about new projects and opportunities. 
-                Whether you're a company looking to hire, or you're a fellow developer 
-                wanting to collaborate, I'd love to hear from you.
+                I&apos;m always interested in hearing about new projects and opportunities. 
+                Whether you&apos;re a company looking to hire, or you&apos;re a fellow developer 
+                wanting to collaborate, I&apos;d love to hear from you.
               </p>
             </div>
 
@@ -96,62 +97,10 @@ export function Contact() {
             <CardHeader>
               <CardTitle>Send me a message</CardTitle>
               <CardDescription>
-                Fill out the form below and I'll get back to you as soon as possible.
+                Fill out the form below and I&apos;ll get back to you as soon as possible.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-foreground">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    className="w-full px-3 py-2 rounded-md border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-foreground">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    className="w-full px-3 py-2 rounded-md border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium text-foreground">
-                  Subject
-                </label>
-                <input
-                  id="subject"
-                  className="w-full px-3 py-2 rounded-md border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="What's this about?"
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-foreground">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  className="w-full px-3 py-2 rounded-md border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-              
-              <Button className="w-full group">
-                <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                Send Message
-              </Button>
-            </CardContent>
+            <ContactForm />
           </Card>
         </div>
       </Container>

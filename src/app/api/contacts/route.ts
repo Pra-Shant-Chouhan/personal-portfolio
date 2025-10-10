@@ -1,68 +1,163 @@
-// /app/api/contact/route.ts
-import { NextResponse } from "next/server";
+// app/api/projects/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import z from "zod";
+import { ApiResponse, PaginatedResponse } from "@/lib/types/api";
+import { ProjectQueryValidationSchema, ProjectValidationSchema } from "@/lib/validators/ProjectValidators";
+import { Project } from "@/app/models/Project.model";
 import { connectToDatabase } from "@/lib/mongodb";
-import { Contact } from "@/app/models/Contact.model";
-import { ContactInput, validateContact } from "@/lib/validators/ContactValidators";
-import { handleError } from "@/lib/handleError";
 
-export const runtime = "nodejs"; // Ensure this runs on Node.js runtime (not Edge)
-
-export async function POST(req: Request) {
+export async function GET(request: NextRequest) {
   try {
-    const json = await req.json();
-    const data: ContactInput = validateContact(json);
-
-    // Connect to DB
     await connectToDatabase();
 
-    // Create a new contact document
-    const created = await Contact.create({
-      name: data.name,
-      email: data.email,
-      subject: data.subject ?? null,
-      message: data.message,
-      mobile: data.mobile ?? null,
-    });
+    const { searchParams } = new URL(request.url);
 
-    return NextResponse.json({ success: true, id: created._id }, { status: 201 });
-  } catch (err) {
-    console.error("/api/contact POST error:", err);
-    // return handleError(err);   // ✅ RETURN the response here using that letter 
-    // // Type narrowing for Zod validation errors
-    if (typeof err === "object" && err !== null && "validation" in err) {
+    // collect raw query params (strings | null)
+    const rawQuery = {
+      page: searchParams.get("page"),
+      limit: searchParams.get("limit"),
+      category: searchParams.get("category"),
+      featured: searchParams.get("featured"),
+      tags: searchParams.get("tags"),
+      sortBy: searchParams.get("sortBy"),
+      sortOrder: searchParams.get("sortOrder"),
+      search: searchParams.get("search"),
+    };
+
+    // validate & coerce using Zod schema (preprocess inside schema)
+    const validatedQuery = ProjectQueryValidationSchema.parse(rawQuery);
+
+    // Build filter object
+    const filter: any = {};
+    // example: only public projects? (uncomment and add field in schema/model if required)
+    // filter.isPublic = true;
+
+    if (validatedQuery.category) filter.category = validatedQuery.category;
+    if (typeof validatedQuery.featured === "boolean") filter.featured = validatedQuery.featured;
+    if (validatedQuery.tags && validatedQuery.tags.length) filter.tags = { $in: validatedQuery.tags };
+    if (validatedQuery.search) {
+      filter.$or = [
+        { title: { $regex: validatedQuery.search, $options: "i" } },
+        { description: { $regex: validatedQuery.search, $options: "i" } },
+        { shortDescription: { $regex: validatedQuery.search, $options: "i" } },
+        { company: { $regex: validatedQuery.search, $options: "i" } },
+      ];
+    }
+
+    const page = validatedQuery.page;
+    const limit = validatedQuery.limit;
+    const skip = (page - 1) * limit;
+
+    const sort: any = {};
+    sort[validatedQuery.sortBy] = validatedQuery.sortOrder === "desc" ? -1 : 1;
+
+    const [projects, total] = await Promise.all([
+      Project.find(filter)
+        .select("-details") // exclude heavy details for list view
+        .sort(sort)
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Project.countDocuments(filter),
+    ]);
+
+    const totalPages = Math.ceil(total / limit);
+    const hasNext = page < totalPages;
+    const hasPrev = page > 1;
+
+    const response: ApiResponse<PaginatedResponse<any>> = {
+      success: true,
+      data: {
+        data: projects,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages,
+          hasNext,
+          hasPrev,
+        },
+      },
+    };
+
+    return NextResponse.json(response, { status: 200 });
+  } catch (error: any) {
+    console.error("GET /api/projects error:", error);
+
+    // Zod validation errors
+    if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { success: false, error: "validation_error", details: (err).validation },
-        { status: 422 }
+        {
+          success: false,
+          error: "Invalid query parameters",
+          data: error.errors,
+        },
+        { status: 400 }
       );
     }
 
-    // Type narrowing for normal Error instances
-    const message =
-      err instanceof Error
-        ? err.message
-        : typeof err === "string"
-          ? err
-          : "unknown_error";
-
     return NextResponse.json(
-      { success: false, error: message },
+      {
+        success: false,
+        error: "Internal server error",
+      },
       { status: 500 }
     );
   }
-
 }
 
-export async function GET() {
+export async function POST(request: NextRequest) {
   try {
     await connectToDatabase();
 
-    const items = await Contact.find().sort({ createdAt: -1 }).limit(10).lean();
+    const body = await request.json();
 
-    return NextResponse.json({ success: true, items });
-  } catch (err: any) {
-    console.error("/api/contact GET error:", err);
+    const validatedData = ProjectValidationSchema.parse(body);
+
+    // check unique slug
+    const existing = await Project.findOne({ slug: validatedData.slug }).lean();
+    if (existing) {
+      return NextResponse.json(
+        { success: false, error: "Project with this slug already exists" },
+        { status: 409 }
+      );
+    }
+
+    // convert date strings to Date objects (if present)
+    const projectDoc = new Project({
+      ...validatedData,
+      startDate: validatedData.startDate ? new Date(validatedData.startDate) : undefined,
+      endDate: validatedData.endDate ? new Date(validatedData.endDate) : undefined,
+    });
+
+    await projectDoc.save();
+
+    const response: ApiResponse<any> = {
+      success: true,
+      data: projectDoc.toObject(),
+      message: "Project created successfully",
+    };
+
+    return NextResponse.json(response, { status: 201 });
+  } catch (error: any) {
+    console.error("POST /api/projects error:", error);
+
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Validation failed",
+          data: error.errors.map((err) => ({ field: err.path.join("."), message: err.message })),
+        },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(
-      { success: false, error: err?.message ?? "unknown" },
+      {
+        success: false,
+        error: "Internal server error",
+      },
       { status: 500 }
     );
   }

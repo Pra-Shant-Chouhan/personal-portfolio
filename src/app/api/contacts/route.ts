@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { Contact } from "@/app/models/Contact.model";
 import { ContactInput, validateContact } from "@/lib/validators/ContactValidators";
+import { handleError } from "@/lib/handleError";
 
 export const runtime = "nodejs"; // Ensure this runs on Node.js runtime (not Edge)
 
@@ -26,11 +27,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, id: created._id }, { status: 201 });
   } catch (err) {
     console.error("/api/contact POST error:", err);
-
-    // Type narrowing for Zod validation errors
+    // return handleError(err);   // ✅ RETURN the response here using that letter 
+    // // Type narrowing for Zod validation errors
     if (typeof err === "object" && err !== null && "validation" in err) {
       return NextResponse.json(
-        { success: false, error: "validation_error", details: (err as any).validation },
+        { success: false, error: "validation_error", details: (err).validation },
         { status: 422 }
       );
     }
@@ -51,18 +52,18 @@ export async function POST(req: Request) {
 
 }
 
-// export async function GET() {
-//   try {
-//     await connectToDatabase();
+export async function GET() {
+  try {
+    await connectToDatabase();
 
-//     const items = await Contact.find().sort({ createdAt: -1 }).limit(10).lean();
+    const items = await Contact.find().sort({ createdAt: -1 }).limit(10).lean();
 
-//     return NextResponse.json({ success: true, items });
-//   } catch (err: any) {
-//     console.error("/api/contact GET error:", err);
-//     return NextResponse.json(
-//       { success: false, error: err?.message ?? "unknown" },
-//       { status: 500 }
-//     );
-//   }
-// }
+    return NextResponse.json({ success: true, items });
+  } catch (err: any) {
+    console.error("/api/contact GET error:", err);
+    return NextResponse.json(
+      { success: false, error: err?.message ?? "unknown" },
+      { status: 500 }
+    );
+  }
+}

@@ -34,10 +34,10 @@ export async function GET(request: NextRequest) {
     const validatedQuery = validation.data;
 
     const filter: any = {};
-    if (validatedQuery.category) filter.category = validatedQuery.category;
-    if (typeof validatedQuery.featured === "boolean") filter.featured = validatedQuery.featured;
-    if (validatedQuery.tags && validatedQuery.tags.length) filter.tags = { $in: validatedQuery.tags };
-    if (validatedQuery.search) {
+    if (validatedQuery?.category) filter.category = validatedQuery.category;
+    if (typeof validatedQuery?.featured === "boolean") filter.featured = validatedQuery.featured;
+    if (validatedQuery?.tags && validatedQuery.tags.length) filter.tags = { $in: validatedQuery.tags };
+    if (validatedQuery?.search) {
       filter.$or = [
         { title: { $regex: validatedQuery.search, $options: "i" } },
         { description: { $regex: validatedQuery.search, $options: "i" } },
@@ -46,12 +46,12 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-    const page = validatedQuery.page;
-    const limit = validatedQuery.limit;
+    const page = validatedQuery?.page || 1;
+    const limit = validatedQuery?.limit || 3;
     const skip = (page - 1) * limit;
 
     const sort: any = {};
-    sort[validatedQuery.sortBy] = validatedQuery.sortOrder === "desc" ? -1 : 1;
+    sort[validatedQuery?.sortBy] = validatedQuery?.sortOrder === "desc" ? -1 : 1;
 
     const [projects, total] = await Promise.all([
       Project.find(filter)
@@ -86,17 +86,6 @@ export async function GET(request: NextRequest) {
   } catch (error: any) {
     console.error("GET /api/projects error:", error);
 
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Invalid query parameters",
-          data: error.errors,
-        },
-        { status: 400 }
-      );
-    }
-
     return NextResponse.json(
       { success: false, error: "Internal server error" },
       { status: 500 }
@@ -120,7 +109,7 @@ export async function POST(request: NextRequest) {
 
     // now safe to connect and insert
     await connectToDatabase();
-    const existing = await Project.findOne({ slug: validatedData.slug });
+    const existing = await Project.findOne({ slug: validatedData?.slug });
 
     if (existing) {
       return NextResponse.json(
@@ -132,8 +121,8 @@ export async function POST(request: NextRequest) {
     // convert date strings to Date objects (if present)
     const projectDoc = new Project({
       ...validatedData,
-      startDate: validatedData.startDate ? new Date(validatedData.startDate) : undefined,
-      endDate: validatedData.endDate ? new Date(validatedData.endDate) : undefined,
+      startDate: validatedData?.startDate ? new Date(validatedData?.startDate) : null,
+      endDate: validatedData?.endDate ? new Date(validatedData?.endDate) : null,
     });
 
     await projectDoc.save();
@@ -147,8 +136,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(response, { status: 201 });
   } catch (error: any) {
     console.error("POST /api/projects error:", error);
-
-
     return NextResponse.json(
       {
         success: false,

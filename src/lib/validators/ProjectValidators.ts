@@ -65,22 +65,40 @@ export const ProjectValidationSchema = z.object({
 export const ProjectUpdateValidationSchema = ProjectValidationSchema.partial();
 
 // Query params (coerce strings from URL -> types)
+// export const ProjectQueryValidationSchema = z.object({
+//   page: z.preprocess((val) => {
+//     const n = toNumber(val);
+//     return n ?? 1;
+//   }, z.number().int().positive()),
+//   limit: z.preprocess((val) => {
+//     const n = toNumber(val);
+//     return n ?? 10;
+//   }, z.number().int().min(1).max(100)),
+//   category: z.string().optional(),
+//   featured: z.preprocess((val) => toBool(val), z.boolean().optional()),
+//   tags: z.preprocess((val) => splitTags(val), z.array(z.string()).optional()),
+//   sortBy: z.enum(["createdAt", "updatedAt", "order", "rank", "title"]).optional().default("order"),
+//   sortOrder: z.enum(["asc", "desc"]).optional().default("desc"),
+//   search: z.string().optional(),
+// });
+
 export const ProjectQueryValidationSchema = z.object({
-  page: z.preprocess((val) => {
+   page: z.preprocess((val) => {
     const n = toNumber(val);
     return n ?? 1;
   }, z.number().int().positive()),
   limit: z.preprocess((val) => {
     const n = toNumber(val);
     return n ?? 10;
-  }, z.number().int().min(1).max(100)),
-  category: z.string().optional(),
-  featured: z.preprocess((val) => toBool(val), z.boolean().optional()),
-  tags: z.preprocess((val) => splitTags(val), z.array(z.string()).optional()),
-  sortBy: z.enum(["createdAt", "updatedAt", "order", "rank", "title"]).optional().default("order"),
-  sortOrder: z.enum(["asc", "desc"]).optional().default("desc"),
-  search: z.string().optional(),
+  }, z.number().int().min(1).max(20)),
+  category: z.string().optional().nullable(),
+  featured: z.boolean().optional().nullable(),
+  tags: z.array(z.string()).optional().nullable(),
+  sortBy: z.enum(["createdAt", "updatedAt", "order", "rank", "title"]).optional().nullable(),
+  sortOrder: z.enum(["asc", "desc"]).optional().nullable(),
+  search: z.string().optional().nullable(),
 });
+
 
 export type CreateProjectInput = z.infer<typeof ProjectValidationSchema>;
 export type UpdateProjectInput = z.infer<typeof ProjectUpdateValidationSchema>;

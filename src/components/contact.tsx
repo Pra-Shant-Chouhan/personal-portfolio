@@ -11,19 +11,19 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "prashant@example.com",
-    href: "mailto:prashant@example.com",
+    value: "pchouhan122@gmail.com",
+    href: "mailto:pchouhan122@gmail.com",
   },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+1 (555) 123-4567",
-    href: "tel:+15551234567",
-  },
+  // {
+  //   icon: Phone,
+  //   label: "Phone",
+  //   value: "+1 (555) 123-4567",
+  //   href: "tel:+15551234567",
+  // },
   {
     icon: MapPin,
     label: "Location",
-    value: "Your City, Country",
+    value: "Mandleshwar, Madhya Pradesh ,India",
     href: "#",
   },
 ]

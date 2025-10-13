@@ -9,11 +9,11 @@ import { Download, Eye, ExternalLink, Mail, FileText } from "lucide-react";
 
 export function CtaButtons() {
     return (
-        <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className=" flex flex-col sm:flex-row gap-4 justify-center items-center">
             {/* Resume Dropdown Button */}
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button className="flex items-center justify-center gap-2 px-6 py-2 md:px-7 md:py-3 h-fit rounded-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 text-sm sm:text-base uppercase">
+                    <Button className="flex items-center justify-center gap-2 px-6 py-2 md:px-7 md:py-1.5 h-fit rounded-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 text-sm sm:text-base uppercase">
                         <FileText className="w-4 h-4 md:w-5 md:h-5" />
                         <span>Resume</span>
 
@@ -49,7 +49,7 @@ export function CtaButtons() {
             <Button
                 variant="outline"
                 asChild
-                className="group flex items-center justify-center gap-2 px-6 py-2 md:px-7 md:py-3 h-auto rounded-xl border-2 border-accent/20 bg-background/40 hover:bg-accent/10 hover:border-accent/30 text-foreground font-medium backdrop-blur-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg hover:text-foreground/80 text-sm sm:text-base uppercase"
+                className="group flex items-center justify-center gap-2 px-6 py-2 md:px-7 md:py-1.5 h-auto rounded-xl border-2 border-accent/20 bg-background/40 hover:bg-accent/10 hover:border-accent/30 text-foreground font-medium backdrop-blur-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg hover:text-foreground/80 text-sm sm:text-base uppercase"
             >
                 <a href="mailto:pchouhan122@gmail.com">
                     <Mail className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform duration-300" />

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useState, useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation"
+import { CtaButtons } from "./CtaButtons"
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -25,7 +26,7 @@ export function Header() {
 
   useEffect(() => {
     setActiveLink(pathname)
-    
+
     // Handle hash changes
     const handleHashChange = () => {
       setHash(window.location.hash)
@@ -52,12 +53,12 @@ export function Header() {
       }
       return activeLink.startsWith(href)
     }
-    
+
     // Handle hash links
     if (href.startsWith('#')) {
       return hash === href
     }
-    
+
     return false
   }
 
@@ -65,7 +66,7 @@ export function Header() {
     if (href.startsWith('#')) {
       event.preventDefault()
       setHash(href)
-      
+
       // Scroll to section
       const element = document.querySelector(href)
       if (element) {
@@ -79,7 +80,7 @@ export function Header() {
         }
       }
     }
-    
+
     // Close mobile menu after click
     setMobileMenuOpen(false)
   }
@@ -109,15 +110,13 @@ export function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(item.href, e)}
-                className={`group ${linkBaseStyles} ${
-                  isActive(item.href) ? linkActiveStyles : linkInactiveStyles
-                }`}
+                className={`group ${linkBaseStyles} ${isActive(item.href) ? linkActiveStyles : linkInactiveStyles
+                  }`}
               >
                 {item.name}
-                <span 
-                  className={`${underlineStyles} ${
-                    isActive(item.href) ? "w-full" : "w-0"
-                  }`} 
+                <span
+                  className={`${underlineStyles} ${isActive(item.href) ? "w-full" : "w-0"
+                    }`}
                 />
               </a>
             ))}
@@ -125,8 +124,12 @@ export function Header() {
 
           {/* Right section */}
           <div className="flex items-center space-x-4">
+            {/* CTA Buttons */}
+            <div className='hidden lg:block'>
+              <CtaButtons />
+            </div>
             <ThemeToggle />
-            
+
             {/* Mobile menu button */}
             <Button
               variant="outline"
@@ -153,17 +156,15 @@ export function Header() {
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleNavClick(item.href, e)}
-                  className={`group relative py-2 text-base font-medium transition-colors duration-200 rounded-md px-3 ${
-                    isActive(item.href)
+                  className={`group relative py-2 text-base font-medium transition-colors duration-200 rounded-md px-3 ${isActive(item.href)
                       ? "text-primary bg-accent/50"
                       : "text-foreground/80 hover:bg-accent hover:text-accent-foreground"
-                  }`}
+                    }`}
                 >
                   {item.name}
-                  <span 
-                    className={`absolute bottom-2 left-3 right-3 h-0.5 bg-primary transition-all duration-300 ${
-                      isActive(item.href) ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
-                    }`} 
+                  <span
+                    className={`absolute bottom-2 left-3 right-3 h-0.5 bg-primary transition-all duration-300 ${isActive(item.href) ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                      }`}
                   />
                 </a>
               ))}

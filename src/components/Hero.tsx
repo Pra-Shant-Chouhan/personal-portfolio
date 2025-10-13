@@ -36,7 +36,7 @@ export function Hero() {
       </div>
 
       <Container className="relative z-10 text-center">
-        <header className="backdrop-blur-md bg-background/40 dark:bg-background/30 rounded-3xl border border-white/20 dark:border-white/10 shadow-2xl p-6 md:p-10 lg:p-12 mx-auto max-w-7xl">
+        <header className="backdrop-blur-md bg-background/40 dark:bg-background/30 rounded-3xl border border-white/20 dark:border-white/10 shadow-2xl p-6 md:p-10 lg:p-12 mx-auto max-w-5xl">
 
           {/* Profile + Name */}
           <div className="grid grid-cols-[1fr_64px] md:grid-cols-[1fr_128px] items-center gap-4 md:gap-8 justify-between">
@@ -81,7 +81,9 @@ export function Hero() {
           </div>
 
           {/* CTA Buttons */}
-          <CtaButtons />
+          <div className='block lg:hidden mt-8'>
+            <CtaButtons />
+          </div>
           {/* Social Links */}
           <div className="mt-8 md:mt-10 flex justify-center gap-3 md:gap-4">
             {/* GitHub */}

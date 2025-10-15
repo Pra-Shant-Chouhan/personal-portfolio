@@ -44,7 +44,7 @@ export function Hero() {
               <TypographyLead className="text-base md:text-lg lg:text-xl font-medium text-muted-foreground mb-2">
                 Hi, I&apos;m
               </TypographyLead>
-              <TypographyH1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+              <TypographyH1 className="">
                 <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Prashant Chouhan
                 </span>

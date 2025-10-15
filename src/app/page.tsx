@@ -1,7 +1,7 @@
 import { Header } from "@/components/header";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/about";
-import { Projects } from "@/components/projects";
+import { Projects } from "@/components/TopProjects";
 import { Contact } from "@/components/contact";
 
 export default function HomePage() {

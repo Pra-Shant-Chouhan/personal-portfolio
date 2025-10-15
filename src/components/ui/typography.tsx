@@ -9,7 +9,7 @@ export function TypographyH1({ className, ...props }: HTMLAttributes<HTMLHeading
   return (
     <h1
       className={cn(
-        "scroll-m-20 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight",
+        "scroll-m-20 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight",
         "text-foreground leading-tight",
         className
       )}
